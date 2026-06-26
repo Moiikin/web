@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RestBar - Bienvenido</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="img/logo.png" alt="Logo del RestBar">
+        </div>
+        <button class="menu-toggle" id="menuToggle">
+            <ion-icon name="menu-outline"></ion-icon>
+        </button>
+        <nav id="navMenu">
+            <ul>
+                <li><a class="active" href="index.html"><ion-icon name="home-outline"></ion-icon>Inicio</a></li>
+                <li><a href="menu.html"><ion-icon name="reader-outline"></ion-icon>Menú</a></li>
+                <li><a href="reservaciones.html"><ion-icon name="calendar-outline"></ion-icon>Reservaciones</a></li>
+                <li><a href="registro.html"><ion-icon name="people-outline"></ion-icon>Registro</a></li>
+                <li><a href="contacto.html"><ion-icon name="call-outline"></ion-icon>Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <span class="eyebrow">RestBar</span>
+                <h1>Bienvenido a RestBar</h1>
+                <p>El lugar perfecto para disfrutar de buena comida, bebidas especiales y un ambiente increíble.</p>
+                <div class="hero-actions">
+                    <a class="btn-primary" href="menu.html">Ver Menú</a>
+                    <a class="btn-secondary" href="menu.html">Promociones</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section home-cards">
+            <article class="home-card">
+                <div class="card-body">
+                    <h3>Menú completo</h3>
+                    <p>Descubre nuestras entradas, platos principales y bebidas con fotos y precios claros.</p>
+                    <a href="menu.html">Ir al menú</a>
+                </div>
+            </article>
+            <article class="home-card">
+                <div class="card-body">
+                    <h3>Combos especiales</h3>
+                    <p>Descubre nuestros combos y promociones dentro del menú para pedir en un solo click.</p>
+                    <a href="menu.html">Explorar combos</a>
+                </div>
+            </article>
+            <article class="home-card">
+                <div class="card-body">
+                    <h3>Regístrate</h3>
+                    <p>Únete a nuestra lista para obtener descuentos exclusivos y noticias especiales.</p>
+                    <a href="registro.html">Registrarse</a>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 RestBar. Todos los derechos reservados.</p>
+        <p><a href="index.html">Volver al inicio</a></p>
+    </footer>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <script>
+        // Menú Hamburguesa
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        const navLinks = navMenu.querySelectorAll('a');
+
+        // Toggle menú al hacer clic en hamburguesa
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Cerrar menú al hacer clic en un enlace
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Cerrar menú al hacer clic fuera
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('header')) {
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RestBar - Registro</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="img/logo.png" alt="Logo del RestBar">
+        </div>
+        <button class="menu-toggle" id="menuToggle">
+            <ion-icon name="menu-outline"></ion-icon>
+        </button>
+        <nav id="navMenu">
+            <ul>
+                <li><a href="index.html"><ion-icon name="home-outline"></ion-icon>Inicio</a></li>
+                <li><a href="menu.html"><ion-icon name="reader-outline"></ion-icon>Menú</a></li>
+                <li><a href="reservaciones.html"><ion-icon name="calendar-outline"></ion-icon>Reservaciones</a></li>
+                <li><a class="active" href="registro.html"><ion-icon name="people-outline"></ion-icon>Registro</a></li>
+                <li><a href="contacto.html"><ion-icon name="call-outline"></ion-icon>Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="registro" class="page-section">
+            <div class="page-header">
+                <span class="eyebrow">Registro</span>
+                <h1>Únete a RestBar</h1>
+                <p>Regístrate para recibir descuentos exclusivos, novedades y promociones especiales.</p>
+            </div>
+
+            <div class="registration-wrapper">
+                <!-- Formulario de Registro -->
+                <div class="registration-form">
+                    <h3>Completa tu registro</h3>
+                    <form action="register.php" method="POST">
+                        <div class="form-group">
+                            <label for="nombre">Nombre completo:</label>
+                            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Correo electrónico:</label>
+                            <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="telefono">Teléfono:</label>
+                            <input type="tel" id="telefono" name="telefono" placeholder="+51 xxx xxx xxx">
+                        </div>
+
+                        <button type="submit" class="btn-register">Registrarse Ahora</button>
+                    </form>
+                </div>
+
+                <!-- Testimonios de Clientes -->
+                <div class="testimonials-section">
+                    <h3>Nuestros clientes disfrutan</h3>
+                    <p class="testimonials-subtitle">Ya tú ve qué dicen de nosotros</p>
+
+                    <div class="testimonials-carousel">
+                        <div class="testimonial-card active-testimonial">
+                            <div class="client-avatar">
+                                <img src="img/aime2.jpg" alt="Aime Herreras">
+                            </div>
+                            <h4>Aime Herreras</h4>
+                            <p class="testimonial-text">"Increíble experiencia en RestBar. Los platos están deliciosos y el servicio es excelente."</p>
+                            <div class="stars">★★★★★</div>
+                        </div>
+
+                        <div class="testimonial-card">
+                            <div class="client-avatar">
+                                <img src="img/yasmin.jpg" alt="María Sánchez">
+                            </div>
+                            <h4>María Sánchez</h4>
+                            <p class="testimonial-text">"Mis amigos y yo volvemos cada fin de semana. Los combos especiales son recomendados."</p>
+                            <div class="stars">★★★★★</div>
+                        </div>
+
+                        <div class="testimonial-card">
+                            <div class="client-avatar">
+                                <img src="img/erick.jpg" alt="Carlos García">
+                            </div>
+                            <h4>Carlos García</h4>
+                            <p class="testimonial-text">"Perfecto para celebrar. Ambiente agradable y promociones increíbles."</p>
+                            <div class="stars">★★★★★</div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-indicators">
+                        <button class="indicator active-indicator" data-index="0"></button>
+                        <button class="indicator" data-index="1"></button>
+                        <button class="indicator" data-index="2"></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 RestBar. Todos los derechos reservados.</p>
+        <p><a href="index.html">Volver al inicio</a></p>
+    </footer>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <script>
+        // Carousel de Testimonios
+        let currentTestimonial = 0;
+        const testimonials = document.querySelectorAll('.testimonial-card');
+        const indicators = document.querySelectorAll('.indicator');
+        const totalTestimonials = testimonials.length;
+
+        function showTestimonial(index) {
+            // Remover clases activas de todos los testimonios
+            testimonials.forEach((card, i) => {
+                if (i === currentTestimonial) {
+                    card.classList.add('exit-testimonial');
+                    card.classList.remove('active-testimonial');
+                }
+            });
+
+            // Actualizar índice
+            currentTestimonial = (index + totalTestimonials) % totalTestimonials;
+
+            // Agregar clase activa al nuevo testimonio después de un pequeño delay
+            setTimeout(() => {
+                testimonials.forEach((card, i) => {
+                    card.classList.remove('exit-testimonial');
+                    if (i === currentTestimonial) {
+                        card.classList.add('active-testimonial');
+                    }
+                });
+
+                // Actualizar indicadores
+                indicators.forEach((indicator, i) => {
+                    if (i === currentTestimonial) {
+                        indicator.classList.add('active-indicator');
+                    } else {
+                        indicator.classList.remove('active-indicator');
+                    }
+                });
+            }, 50);
+        }
+
+        // Cambiar testimonio automáticamente cada 6 segundos
+        setInterval(() => {
+            showTestimonial(currentTestimonial + 1);
+        }, 6000);
+
+        // Agregar event listeners a los indicadores
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                showTestimonial(index);
+            });
+        });
+    </script>
+
+    <script>
+        // Menú Hamburguesa
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        const navLinks = navMenu.querySelectorAll('a');
+
+        // Toggle menú al hacer clic en hamburguesa
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Cerrar menú al hacer clic en un enlace
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Cerrar menú al hacer clic fuera
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('header')) {
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
